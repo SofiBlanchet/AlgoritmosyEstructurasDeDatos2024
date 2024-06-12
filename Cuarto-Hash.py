@@ -15,7 +15,7 @@ e. mostrar todos los Pokémons cuyos numeros terminan en 3, 7 y 9;
 
 f. mostrar todos los Pokémons cuyos niveles son multiplos de 2, 5 y 10;
 
-g. mostrar todos los Pokémons de los siguientes tipo: Acero, Fuego, Electrifico, Hielo"""
+g. mostrar todos los Pokémons de los siguientes tipo: Acero, Fuego, Electrifico,Hielo"""
 
 class Pokemon:
     def __init__(self,numero, nombre, tipo, nivel):
