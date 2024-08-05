@@ -246,5 +246,253 @@ for index, heroe in enumerate(super_heroes):
 print ("La cantidad en DC Comics es de ",D, ", mientras que en Marvel Comics",M)
 
 print ("------------------------------------------------------------------------------------")
-#Falta el punto 15
+print("------------------PUNTO 15-------------------------")
+entrenadores = [
+    {
+        "nombre": "Ash Ketchum",
+        "torneos_ganados": 7,
+        "batallas_perdidas": 50,
+        "batallas_ganadas": 120
+    },
+    {
+        "nombre": "Goh",
+        "torneos_ganados": 2,
+        "batallas_perdidas": 10,
+        "batallas_ganadas": 40
+    },
+    {
+        "nombre": "Leon",
+        "torneos_ganados": 10,
+        "batallas_perdidas": 5,
+        "batallas_ganadas": 100
+    },
+    {
+        "nombre": "Chloe",
+        "torneos_ganados": 1,
+        "batallas_perdidas": 8,
+        "batallas_ganadas": 30
+    },
+    {
+        "nombre": "Raihan",
+        "torneos_ganados": 4,
+        "batallas_perdidas": 15,
+        "batallas_ganadas": 60
+    }
+]
+
+pokemons = [
+    {
+        "nombre": "Pikachu",
+        "nivel": 35,
+        "tipo": "Eléctrico",
+        "subtipo": None
+    },
+    {
+        "nombre": "Pikachu",
+        "nivel": 20,
+        "tipo": "Eléctrico",
+        "subtipo": None
+    },
+    {
+        "nombre": "Charizard",
+        "nivel": 40,
+        "tipo": "Fuego",
+        "subtipo": "Volador"
+    },
+    {
+        "nombre": "Bulbasaur",
+        "nivel": 30,
+        "tipo": "Planta",
+        "subtipo": "Veneno"
+    },
+    {
+        "nombre": "Starmie",
+        "nivel": 30,
+        "tipo": "Agua",
+        "subtipo": "Psíquico"
+    },
+    {
+        "nombre": "Psyduck",
+        "nivel": 25,
+        "tipo": "Agua",
+        "subtipo": None
+    },
+    {
+        "nombre": "Gyarados",
+        "nivel": 35,
+        "tipo": "Agua",
+        "subtipo": "Volador"
+    },
+    {
+        "nombre": "Onix",
+        "nivel": 38,
+        "tipo": "Roca",
+        "subtipo": "Tierra"
+    },
+    {
+        "nombre": "Geodude",
+        "nivel": 28,
+        "tipo": "Roca",
+        "subtipo": "Tierra"
+    },
+    {
+        "nombre": "Vulpix",
+        "nivel": 20,
+        "tipo": "Fuego",
+        "subtipo": None
+    },
+    {
+        "nombre": "Blastoise",
+        "nivel": 50,
+        "tipo": "Agua",
+        "subtipo": None
+    },
+    {
+        "nombre": "Umbreon",
+        "nivel": 45,
+        "tipo": "Siniestro",
+        "subtipo": None
+    },
+    {
+        "nombre": "Nidoking",
+        "nivel": 40,
+        "tipo": "Veneno",
+        "subtipo": "Tierra"
+    },
+    {
+        "nombre": "Dragonite",
+        "nivel": 55,
+        "tipo": "Dragón",
+        "subtipo": "Volador"
+    },
+    {
+        "nombre": "Aerodactyl",
+        "nivel": 52,
+        "tipo": "Roca",
+        "subtipo": "Volador"
+    },
+    {
+        "nombre": "Terrakion",
+        "nivel": 52,
+        "tipo": "Tierra",
+        "subtipo": None
+    }
+]
+
+nombres = ["Ash Ketchum", "Goh", "Leon", "Chloe", "Raihan"]
+
+lista_entrenadores = []
+
+for entrenador in entrenadores:
+    entrenador.update({'sublist': []})
+    lista_entrenadores.append(entrenador)
+
+for pokemon in pokemons:
+    pos = search(lista_entrenadores, 'nombre', choice(nombres))
+    if pos is not None:
+        lista_entrenadores[pos]['sublist'].append(pokemon)
+    else:
+        print('no existe el entrenador')
+
+
+
+print("-------------PUNTO A-------------")
+buscado=(input("Ingrese el entrenador que busca para saber la cantidad de pokemones que tiene: "))
+pos=search(lista_entrenadores,'nombre',buscado)
+c=0
+if pos is not None:
+      for pokemon in lista_entrenadores[pos]['sublist']:
+          c+=1
+      print("La cantidad de pokemones de",buscado, "es de",c)
+
+print("-------------PUNTO B-------------")
+print ("Los entrenadores con mas de 3 torneos ganados son: ")
+for index,entrenador in enumerate(lista_entrenadores):
+    if entrenador['torneos_ganados']>3:
+        print (entrenador['nombre'])
+
+print("-------------PUNTO C-------------") #el que mas batallas gano, y sus poke mas poderoso
+ 
+lista_entrenadores.sort(key=by_ganado,reverse=True)
+show_list_list('Entrenadores', 'Pokemons', lista_entrenadores)
+mayor=0
+for pokemon in lista_entrenadores[0]['sublist']:
+    if pokemon['nivel']>mayor:
+        mayor=pokemon['nivel']
+        pokemonn=pokemon['nombre']
+print ("El pokemon de mayor nivel es", pokemonn, "con nivel" ,mayor)
+
+print("-------------PUNTO D-------------")
+buscado = input("Ingrese el entrenador que busca para ver sus pokemons: ")
+pos = search(lista_entrenadores, 'nombre', buscado)
+
+if pos is not None:
+    entrenador = lista_entrenadores[pos]
+    print(f"Datos del entrenador: torneos ganados: {entrenador['torneos_ganados']}, batallas perdidas: {entrenador['batallas_perdidas']}, batallas ganadas: {entrenador['batallas_ganadas']}")
+    print("Pokémones:")
+    for pokemon in lista_entrenadores[pos]['sublist']:
+        print (pokemon)
+
+print("-------------PUNTO E-------------")
+for entrenador in lista_entrenadores:
+    porcentaje = (entrenador['batallas_ganadas'] / (entrenador['batallas_ganadas'] + entrenador['batallas_perdidas'])) * 100
+    if porcentaje > 79:
+        print(f"Nombre: {entrenador['nombre']}, porcentaje de batallas ganadas: {porcentaje:.2f}%")
+
+print("-------------PUNTO F-------------")
+
+for entrenador in lista_entrenadores:
+    for pokemon in entrenador['sublist']:
+        if pokemon['tipo'] == "Fuego" or pokemon['subtipo'] == "Fuego":
+            if pokemon['tipo'] == "Planta" or pokemon['subtipo'] == "Planta":
+                print(f"Entrenador :{entrenador['nombre']}, Pokemon :{pokemon['nombre']}, tipo/subtipo : Fuego/Planta")
+        if pokemon['tipo'] == "Agua" or pokemon['subtipo'] == "Agua":
+            if pokemon['tipo'] == "Volador" or pokemon['subtipo'] == "Volador":
+                print(f"Entrenador :{entrenador['nombre']}, Pokemon :{pokemon['nombre']}, tipo/subtipo : Agua/Volador")
+
+print("-------------PUNTO G-------------")
+
+nombre_entrenador = input("Ingrese nombre de entrenador para promediar el nivel de sus pokemons")
+
+def sumatorianiveles(pokemons):
+    if len(pokemons) == 1:
+      return pokemons[0]['nivel']
+    else:
+        nivel = pokemons[-1]['nivel']
+        pokemons.pop()
+        return nivel + sumatorianiveles(pokemons)
+    
+for entrenador in lista_entrenadores:
+    if entrenador['nombre'] == nombre_entrenador:
+        if len(entrenador['sublist']) != 0:
+          cantidad = len(entrenador['sublist'])
+          promedio = sumatorianiveles(entrenador['sublist']) / cantidad
+          print(f"Entrenador :{entrenador['nombre']}, Nivel promedio :{promedio}")
+
+
+print("-------------PUNTO H-------------")
+nombre_pokemon = input("Ingrese nombre de pokemon a buscar entre los entrenadores")
+cant = 0
+for entrenador in lista_entrenadores:
+    for pokemon in entrenador['sublist']:
+        if pokemon['nombre'] == nombre_pokemon:
+            cant += 1
+print(f"La cantidad de pokemones que tiene a {nombre_pokemon} es : {cant}")
+
+
+print("-------------PUNTO I-------------")
+for entrenador in lista_entrenadores:
+    # Convertir cada diccionario a una tupla de pares clave-valor ordenados
+    tuplas = [tuple(sorted(d.items())) for d in entrenador['sublist']]
+    if len(tuplas) != len(set(tuplas)):
+        print(entrenador)
+
+print("-------------PUNTO J-------------")
+
+pokemones_buscados = ["Tyrantrum", "Terrakion", "Wingull"]
+for entrenador in lista_entrenadores:
+    for pokemon in entrenador['sublist']:
+      if pokemon['nombre'] in pokemones_buscados:
+          print(f"El entrenador {entrenador['nombre']} tiene a {pokemon['nombre']}")
+
 
